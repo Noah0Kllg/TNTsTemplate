@@ -65,12 +65,12 @@ DWORD WINAPI MainThread()
 	bool init_hook = false;
 	do
 	{
-			// Temporarily disabled kiero
-	// if (kiero::init(kiero::RenderType::D3D11) == kiero::Status::Success)
-	// {
-	// 	kiero::bind(8, (void**)&oPresent, hkPresent);
-			init_hook = true;
-		}
+		// Temporarily disabled kiero
+		// if (kiero::init(kiero::RenderType::D3D11) == kiero::Status::Success)
+		// {
+		// 	kiero::bind(8, (void**)&oPresent, hkPresent);
+		// }
+		init_hook = true;
 	} while (!init_hook);
 	return TRUE;
 }
