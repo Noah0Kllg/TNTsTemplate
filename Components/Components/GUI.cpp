@@ -228,7 +228,8 @@ void GUIComponent::InitMainTab() {
 		ImGui::SliderFloat("Y Position", &KeyboardOverlayInstance.Position.y, 0.0f, 1080.0f, "%.0f");
 		
 		if (ImGui::Button("Reset Position")) {
-			KeyboardOverlayInstance.Position = ImVec2(50.0f, 50.0f);
+			KeyboardOverlayInstance.Position.x = 50.0f;
+			KeyboardOverlayInstance.Position.y = 50.0f;
 		}
 		
 		ImGui::SameLine();
@@ -237,7 +238,8 @@ void GUIComponent::InitMainTab() {
 			KeyboardOverlayInstance.ShowKeyNames = true;
 			KeyboardOverlayInstance.Opacity = 0.8f;
 			KeyboardOverlayInstance.Scale = 1.0f;
-			KeyboardOverlayInstance.Position = ImVec2(50.0f, 50.0f);
+			KeyboardOverlayInstance.Position.x = 50.0f;
+			KeyboardOverlayInstance.Position.y = 50.0f;
 		}
 	}
 }
