@@ -36,3 +36,8 @@ public:
 };
 
 extern class ExampleModule Example;
+
+// Forward declaration for KeyboardOverlay
+struct Vec2;
+class KeyboardOverlay;
+extern KeyboardOverlay KeyboardOverlayInstance;

@@ -54,7 +54,7 @@ set(SOURCES
     Example.cpp
     Modules/Module.cpp
     Modules/Mods/Drawing.cpp
-    Modules/Mods/KeyboardOverlayMinimal.cpp
+
     Components/Component.cpp
     Components/Components/Core.cpp
     Components/Components/Console.cpp
@@ -80,7 +80,7 @@ set(HEADERS
     Example.hpp
     Modules/Module.hpp
     Modules/Mods/Drawing.hpp
-    Modules/Mods/KeyboardOverlayMinimal.hpp
+
     Modules/Mods/KeyboardOverlayConfig.hpp
     Modules/Includes.hpp
     Components/Component.hpp
