@@ -82,7 +82,6 @@ void ConsoleComponent::Debug(const int& number, const char* file, int line)
 	WriteInternal("[" + std::string(file) + "][" + std::to_string(line) + "] " + std::to_string(number), TextColors::LightRed);
 }
 
-
 void ConsoleComponent::Initialize(const std::filesystem::path& directory, const std::string& fileName)
 {
 	OutputHandle = nullptr;
