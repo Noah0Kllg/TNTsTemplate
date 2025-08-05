@@ -82,7 +82,6 @@ void ConsoleComponent::Debug(const int& number, const char* file, int line)
 	WriteInternal("[" + std::string(file) + "][" + std::to_string(line) + "] " + std::to_string(number), TextColors::LightRed);
 }
 
-
 void ConsoleComponent::Initialize(const std::filesystem::path& directory, const std::string& fileName)
 {
 	OutputHandle = nullptr;
@@ -90,8 +89,7 @@ void ConsoleComponent::Initialize(const std::filesystem::path& directory, const 
 	WriteToLog = true;
 	WriteTimestamp = true;
 
-	// Open the standard out stream and show the window, then grab its handle so we can set the text color.
-
+	// Simple console initialization without SetConsoleTitle
 	AllocConsole();
 	freopen_s(&OutputFile, "CONOUT$", "w", stdout);
 	ShowWindow(GetConsoleWindow(), SW_SHOW);
@@ -101,8 +99,6 @@ void ConsoleComponent::Initialize(const std::filesystem::path& directory, const 
 	{
 		LogFile.open(directory / fileName);
 	}
-
-	SetConsoleTitle(L"Console (DO NOT CLOSE)");
 
 	Write(GetNameFormatted() + "Initialized!");
 }

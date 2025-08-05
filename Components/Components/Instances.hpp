@@ -47,7 +47,8 @@ public: // Helper functions for class instance grabbing/manipulation.
 	{
 		if (std::is_base_of<UObject, T>::value)
 		{
-			for (int32_t i = UObject::GObjObjects()->size(); i > 0; i--)
+			// Fix: Start from size() - 1, not size()
+			for (int32_t i = UObject::GObjObjects()->size() - 1; i >= 0; i--)
 			{
 				UObject* uObject = UObject::GObjObjects()->at(i);
 
@@ -65,7 +66,7 @@ public: // Helper functions for class instance grabbing/manipulation.
 	}
 
 	// Get all active instances of a class type. Example: std::vector<APawn*> pawns = GetAllInstancesOf<APawn>();
-	template<typename T> T* GetInstanceOf()
+	template<typename T> std::vector<T*> GetAllInstancesOf()
 	{
 		if (std::is_base_of<UObject, T>::value)
 		{

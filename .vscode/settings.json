@@ -1,0 +1,32 @@
+{
+    "cmake.configureOnOpen": true,
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.generator": "Visual Studio 17 2022",
+    "cmake.preferredGenerators": [
+        "Visual Studio 17 2022",
+        "Visual Studio 16 2019",
+        "Ninja"
+    ],
+    "cmake.architecture": "x64",
+    "cmake.buildType": "Release",
+    "cmake.parallelJobs": 4,
+    "cmake.debugConfig": {
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": []
+    },
+    "cmake.configureSettings": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "ENABLE_KEYBOARD_OVERLAY": "ON",
+        "ENABLE_DEBUG_OUTPUT": "ON",
+        "ENABLE_IMGUI_DEMO": "OFF",
+        "COPY_DEPENDENCIES": "ON"
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "C_Cpp.default.cppStandard": "c++20",
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.default.intelliSenseMode": "windows-msvc-x64",
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.warningSquiggles": "enabled",
+    "C_Cpp.intelliSenseEngine": "default"
+}

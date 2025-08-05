@@ -1,5 +1,25 @@
 # TNTs-Template
-### Template for creating Rocket League mods (you need to build it in Release x64)
+### Template for creating Rocket League mods with Keyboard Overlay
+
+## 🚀 Quick Build Options
+
+### Option 1: CMake (Recommended)
+```bash
+mkdir build
+cd build
+cmake .. -G "Visual Studio 17 2022"
+cmake --build . --config Release
+```
+
+### Option 2: Visual Studio
+- Open `tntsTemplate.sln` in Visual Studio
+- Build in Release x64 configuration
+
+### Option 3: Build Scripts
+- **CMake**: Run `build_cmake.bat`
+- **Visual Studio**: Run `build.bat`
+
+See `CMAKE_BUILD_GUIDE.md` for detailed CMake instructions.
 `DISCLAIMER: IF YOU USE THIS PROJECT FOR MALICIOUS PURPOSES THAT IS ON YOU :P THIS PROJECT HAS BEEN CREATED FOR SOLELY MODDING THE GAME.`
 - This project contains code from ItsBranK's old CodeRedTemplate and has ImGui built in using KieroHook.
 - This Project is based on Snayck's Template

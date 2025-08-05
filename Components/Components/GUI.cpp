@@ -11,6 +11,7 @@
 #include "../ImGui/imgui_stdlib.h"
 #include "../../Example.hpp"
 
+
 typedef HRESULT(__stdcall* Present) (IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags);
 typedef LRESULT(CALLBACK* WNDPROC)(HWND, UINT, WPARAM, LPARAM);
 typedef uintptr_t PTR;
@@ -64,11 +65,12 @@ DWORD WINAPI MainThread()
 	bool init_hook = false;
 	do
 	{
-		if (kiero::init(kiero::RenderType::D3D11) == kiero::Status::Success)
-		{
-			kiero::bind(8, (void**)&oPresent, hkPresent);
-			init_hook = true;
-		}
+		// Temporarily disabled kiero
+		// if (kiero::init(kiero::RenderType::D3D11) == kiero::Status::Success)
+		// {
+		// 	kiero::bind(8, (void**)&oPresent, hkPresent);
+		// }
+		init_hook = true;
 	} while (!init_hook);
 	return TRUE;
 }
@@ -82,7 +84,8 @@ void GUIComponent::Unload()
 
 	if (init)
 	{
-		kiero::shutdown();
+		// Temporarily disabled kiero
+		// kiero::shutdown();
 		ImGui_ImplDX11_Shutdown();
 		ImGui_ImplWin32_Shutdown();
 		ImGui::DestroyContext();
@@ -210,6 +213,37 @@ void GUIComponent::InitMainTab() {
 			Main.SpawnNotification("Template", "Template button has been pressed!", 10);
 		});
 	}
+	
+	ImGui::Separator();
+	
+	// Keyboard Overlay Settings
+	ImGui::Text("Keyboard Overlay Settings");
+	ImGui::Checkbox("Enable Overlay", &KeyboardOverlayInstance.IsEnabled);
+	
+	if (KeyboardOverlayInstance.IsEnabled) {
+		ImGui::Checkbox("Show Key Names", &KeyboardOverlayInstance.ShowKeyNames);
+		ImGui::SliderFloat("Opacity", &KeyboardOverlayInstance.Opacity, 0.1f, 1.0f, "%.2f");
+		ImGui::SliderFloat("Scale", &KeyboardOverlayInstance.Scale, 0.5f, 2.0f, "%.2f");
+		
+		ImGui::Text("Position");
+		ImGui::SliderFloat("X Position", &KeyboardOverlayInstance.Position.x, 0.0f, 1920.0f, "%.0f");
+		ImGui::SliderFloat("Y Position", &KeyboardOverlayInstance.Position.y, 0.0f, 1080.0f, "%.0f");
+		
+		if (ImGui::Button("Reset Position")) {
+			KeyboardOverlayInstance.Position.x = 50.0f;
+			KeyboardOverlayInstance.Position.y = 50.0f;
+		}
+		
+		ImGui::SameLine();
+		if (ImGui::Button("Reset All Settings")) {
+			KeyboardOverlayInstance.IsEnabled = true;
+			KeyboardOverlayInstance.ShowKeyNames = true;
+			KeyboardOverlayInstance.Opacity = 0.8f;
+			KeyboardOverlayInstance.Scale = 1.0f;
+			KeyboardOverlayInstance.Position.x = 50.0f;
+			KeyboardOverlayInstance.Position.y = 50.0f;
+		}
+	}
 }
 
 
@@ -228,6 +262,9 @@ void GUIComponent::Render()
 	if (Example.IsInGame) {
 		Example.OnRender();
 	}
+	
+	// Render keyboard overlay
+	KeyboardOverlayInstance.OnRender();
 
 	IO.MouseDrawCursor = IsOpen;
 	ImGui::SetNextWindowSize(ImVec2(840, 450));

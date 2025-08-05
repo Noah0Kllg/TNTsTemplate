@@ -119,6 +119,9 @@ void ExampleModule::PlayerTickCalled(const PostEvent& event) {
         FVector screenPos = Drawing::CalculateScreenCoordinate(ballLocation, localPlayerController);
         ballScreenPositions.push_back(screenPos);
     }
+
+    // Update keyboard overlay inputs
+    KeyboardOverlay::UpdateInputs(localPlayerController);
 }
 
 void ExampleModule::OnRender() {
@@ -207,3 +210,87 @@ void ExampleModule::Initialize() {
 
 
 ExampleModule Example;
+
+// Simple Keyboard Overlay Implementation
+struct Vec2 {
+    float x, y;
+    Vec2(float _x = 0.0f, float _y = 0.0f) : x(_x), y(_y) {}
+};
+
+class KeyboardOverlay {
+public:
+    static bool IsEnabled;
+    static bool ShowKeyNames;
+    static float Opacity;
+    static float Scale;
+    static Vec2 Position;
+    static std::map<std::string, bool> KeyStates;
+    static FVehicleInputs LastInputs;
+
+    static void Initialize() {
+        IsEnabled = true;
+        ShowKeyNames = true;
+        Opacity = 0.8f;
+        Scale = 1.0f;
+        Position = Vec2(50.0f, 50.0f);
+        
+        // Initialize key states
+        KeyStates["W"] = false;
+        KeyStates["A"] = false;
+        KeyStates["S"] = false;
+        KeyStates["D"] = false;
+        KeyStates["Space"] = false;
+        KeyStates["Shift"] = false;
+        KeyStates["Ctrl"] = false;
+        
+        LastInputs = FVehicleInputs{};
+        
+        Console.Write("KeyboardOverlay Initialized.");
+    }
+
+    static void UpdateInputs(APlayerController_TA* playerController) {
+        if (!playerController || !IsEnabled) return;
+
+        try {
+            FVehicleInputs currentInputs = SafeRead<FVehicleInputs>((uintptr_t)playerController + Offsets::TAGame::PlayerController_TA::VehicleInput);
+            
+            KeyStates["W"] = currentInputs.Throttle > 0.1f;
+            KeyStates["S"] = currentInputs.Throttle < -0.1f;
+            KeyStates["A"] = currentInputs.Steer < -0.1f;
+            KeyStates["D"] = currentInputs.Steer > 0.1f;
+            KeyStates["Space"] = currentInputs.Jump;
+            KeyStates["Shift"] = currentInputs.ActivateBoost;
+            KeyStates["Ctrl"] = currentInputs.Handbrake;
+            
+            LastInputs = currentInputs;
+        }
+        catch (...) {
+            Console.Error("KeyboardOverlay: Exception in UpdateInputs");
+        }
+    }
+
+    void OnRender() {
+        if (!IsEnabled) return;
+
+        // Simple console output for now
+        if (KeyStates["W"]) Console.Write("W pressed");
+        if (KeyStates["A"]) Console.Write("A pressed");
+        if (KeyStates["S"]) Console.Write("S pressed");
+        if (KeyStates["D"]) Console.Write("D pressed");
+        if (KeyStates["Space"]) Console.Write("Space pressed");
+        if (KeyStates["Shift"]) Console.Write("Shift pressed");
+        if (KeyStates["Ctrl"]) Console.Write("Ctrl pressed");
+    }
+};
+
+// Static member initialization
+bool KeyboardOverlay::IsEnabled = true;
+bool KeyboardOverlay::ShowKeyNames = true;
+float KeyboardOverlay::Opacity = 0.8f;
+float KeyboardOverlay::Scale = 1.0f;
+Vec2 KeyboardOverlay::Position(50.0f, 50.0f);
+std::map<std::string, bool> KeyboardOverlay::KeyStates;
+FVehicleInputs KeyboardOverlay::LastInputs;
+
+// Global instance
+KeyboardOverlay KeyboardOverlayInstance;
