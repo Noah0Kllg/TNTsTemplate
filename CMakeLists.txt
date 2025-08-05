@@ -128,6 +128,17 @@ else()
     endif()
 endif()
 
+# Kiero library - temporarily disabled
+# if(EXISTS "${CMAKE_SOURCE_DIR}/Kiero/kiero.lib")
+#     set(KIERO_LIB "${CMAKE_SOURCE_DIR}/Kiero/kiero.lib")
+# else()
+#     # Try to find Kiero in system
+#     find_library(KIERO_LIB NAMES kiero)
+#     if(NOT KIERO_LIB)
+#         message(FATAL_ERROR "Kiero library not found. Please ensure it's available.")
+#     endif()
+# endif()
+
 # Create the DLL
 add_library(${PROJECT_NAME} SHARED 
     ${SOURCES}

@@ -269,7 +269,7 @@ public:
         }
     }
 
-    static void OnRender() {
+    void OnRender() {
         if (!IsEnabled) return;
 
         // Simple console output for now
