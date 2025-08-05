@@ -15,6 +15,7 @@ void MainComponent::OnDestroy() {}
 void MainComponent::Initialize() {
     Main.Execute([]() {
         Example.Initialize(); // initalize it
+        KeyboardOverlayInstance.Initialize(); // initialize keyboard overlay
     });
 }
 

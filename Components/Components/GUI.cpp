@@ -10,6 +10,7 @@
 #include "../ImGui/imgui_impl_dx11.h"
 #include "../ImGui/imgui_stdlib.h"
 #include "../../Example.hpp"
+#include "../Modules/Mods/KeyboardOverlay.hpp"
 
 typedef HRESULT(__stdcall* Present) (IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags);
 typedef LRESULT(CALLBACK* WNDPROC)(HWND, UINT, WPARAM, LPARAM);
@@ -210,6 +211,35 @@ void GUIComponent::InitMainTab() {
 			Main.SpawnNotification("Template", "Template button has been pressed!", 10);
 		});
 	}
+	
+	ImGui::Separator();
+	
+	// Keyboard Overlay Settings
+	ImGui::Text("Keyboard Overlay Settings");
+	ImGui::Checkbox("Enable Overlay", &KeyboardOverlayInstance.IsEnabled);
+	
+	if (KeyboardOverlayInstance.IsEnabled) {
+		ImGui::Checkbox("Show Key Names", &KeyboardOverlayInstance.ShowKeyNames);
+		ImGui::SliderFloat("Opacity", &KeyboardOverlayInstance.Opacity, 0.1f, 1.0f, "%.2f");
+		ImGui::SliderFloat("Scale", &KeyboardOverlayInstance.Scale, 0.5f, 2.0f, "%.2f");
+		
+		ImGui::Text("Position");
+		ImGui::SliderFloat("X Position", &KeyboardOverlayInstance.Position.x, 0.0f, 1920.0f, "%.0f");
+		ImGui::SliderFloat("Y Position", &KeyboardOverlayInstance.Position.y, 0.0f, 1080.0f, "%.0f");
+		
+		if (ImGui::Button("Reset Position")) {
+			KeyboardOverlayInstance.Position = ImVec2(50.0f, 50.0f);
+		}
+		
+		ImGui::SameLine();
+		if (ImGui::Button("Reset All Settings")) {
+			KeyboardOverlayInstance.IsEnabled = true;
+			KeyboardOverlayInstance.ShowKeyNames = true;
+			KeyboardOverlayInstance.Opacity = 0.8f;
+			KeyboardOverlayInstance.Scale = 1.0f;
+			KeyboardOverlayInstance.Position = ImVec2(50.0f, 50.0f);
+		}
+	}
 }
 
 
@@ -228,6 +258,9 @@ void GUIComponent::Render()
 	if (Example.IsInGame) {
 		Example.OnRender();
 	}
+	
+	// Render keyboard overlay
+	KeyboardOverlayInstance.OnRender();
 
 	IO.MouseDrawCursor = IsOpen;
 	ImGui::SetNextWindowSize(ImVec2(840, 450));
