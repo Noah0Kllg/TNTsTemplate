@@ -1,24 +1,22 @@
 #pragma once
 #include "../Module.hpp"
 #include "../../Components/Includes.hpp"
-#include "KeyboardOverlayConfig.hpp"
 #include <map>
 #include <string>
 #include <vector>
 
-// Simple ImGui type definitions for header-only usage
-struct ImVec2 {
+// Simple vector type for 2D coordinates
+struct Vec2 {
     float x, y;
-    ImVec2(float _x = 0.0f, float _y = 0.0f) : x(_x), y(_y) {}
+    Vec2(float _x = 0.0f, float _y = 0.0f) : x(_x), y(_y) {}
 };
-typedef unsigned int ImU32;
 
 struct KeyDisplay {
     std::string keyName;
     bool isPressed;
-    ImVec2 position;
-    ImVec2 size;
-    ImU32 color;
+    Vec2 position;
+    Vec2 size;
+    unsigned int color;
 };
 
 class KeyboardOverlay : public Module
@@ -37,19 +35,19 @@ public:
     // Input tracking functions
     static void UpdateInputs(APlayerController_TA* playerController);
     static void RenderKeyboardLayout();
-    static void RenderKey(const std::string& keyName, const ImVec2& position, const ImVec2& size, bool isPressed);
+    static void RenderKey(const std::string& keyName, const Vec2& position, const Vec2& size, bool isPressed);
 
     // Keyboard layout configuration
     static void SetupKeyboardLayout();
-    static ImVec2 GetKeyPosition(const std::string& keyName);
-    static ImVec2 GetKeySize(const std::string& keyName);
+    static Vec2 GetKeyPosition(const std::string& keyName);
+    static Vec2 GetKeySize(const std::string& keyName);
 
     // Settings
     static bool IsEnabled;
     static bool ShowKeyNames;
     static float Opacity;
     static float Scale;
-    static ImVec2 Position;
+    static Vec2 Position;
 
     // Input state tracking
     static std::map<std::string, bool> KeyStates;

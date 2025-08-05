@@ -10,7 +10,7 @@
 #include "../ImGui/imgui_impl_dx11.h"
 #include "../ImGui/imgui_stdlib.h"
 #include "../../Example.hpp"
-#include "../Modules/Mods/KeyboardOverlay.hpp"
+#include "../Modules/Mods/KeyboardOverlaySimple.hpp"
 
 typedef HRESULT(__stdcall* Present) (IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags);
 typedef LRESULT(CALLBACK* WNDPROC)(HWND, UINT, WPARAM, LPARAM);
