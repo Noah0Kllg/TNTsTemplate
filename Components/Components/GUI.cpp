@@ -10,6 +10,7 @@
 #include "../ImGui/imgui_impl_dx11.h"
 #include "../ImGui/imgui_stdlib.h"
 #include "../../Example.hpp"
+#include "../../Modules/Mods/KeyboardOverlay.hpp"
 
 typedef HRESULT(__stdcall* Present) (IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags);
 typedef LRESULT(CALLBACK* WNDPROC)(HWND, UINT, WPARAM, LPARAM);
@@ -227,6 +228,7 @@ void GUIComponent::Render()
 
 	if (Example.IsInGame) {
 		Example.OnRender();
+		KeyboardOverlayInstance.OnRender();
 	}
 
 	IO.MouseDrawCursor = IsOpen;

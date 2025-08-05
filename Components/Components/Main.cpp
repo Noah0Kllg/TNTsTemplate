@@ -2,6 +2,7 @@
 #include "../Includes.hpp"
 #include "../Modules/Includes.hpp"
 #include "../../Example.hpp" // include your module
+#include "../../Modules/Mods/KeyboardOverlay.hpp"
 
 
 MainComponent::MainComponent() : Component("Main", "Interface to game interacton") { OnCreate(); }
@@ -15,6 +16,7 @@ void MainComponent::OnDestroy() {}
 void MainComponent::Initialize() {
     Main.Execute([]() {
         Example.Initialize(); // initalize it
+        KeyboardOverlayInstance.Initialize(); // initialize keyboard overlay
     });
 }
 
