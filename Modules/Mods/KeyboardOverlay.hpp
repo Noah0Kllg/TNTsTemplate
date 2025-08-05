@@ -6,6 +6,10 @@
 #include <string>
 #include <vector>
 
+// Forward declarations for ImGui types
+struct ImVec2;
+typedef unsigned int ImU32;
+
 struct KeyDisplay {
     std::string keyName;
     bool isPressed;
