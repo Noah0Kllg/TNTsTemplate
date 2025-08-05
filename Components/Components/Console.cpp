@@ -89,7 +89,7 @@ void ConsoleComponent::Initialize(const std::filesystem::path& directory, const 
 	WriteToLog = true;
 	WriteTimestamp = true;
 
-	// Open the standard out stream and show the window, then grab its handle so we can set the text color.
+	// Simple console initialization without SetConsoleTitle
 	AllocConsole();
 	freopen_s(&OutputFile, "CONOUT$", "w", stdout);
 	ShowWindow(GetConsoleWindow(), SW_SHOW);

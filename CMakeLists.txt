@@ -148,7 +148,6 @@ target_link_libraries(${PROJECT_NAME}
     d3d11
     dxgi
     d3dcompiler
-    d3dx11
     winmm
     psapi
     kernel32
