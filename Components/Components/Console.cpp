@@ -102,7 +102,7 @@ void ConsoleComponent::Initialize(const std::filesystem::path& directory, const 
 		LogFile.open(directory / fileName);
 	}
 
-	SetConsoleTitle(L"Console (DO NOT CLOSE)");
+	SetConsoleTitleA("Console (DO NOT CLOSE)");
 
 	Write(GetNameFormatted() + "Initialized!");
 }
