@@ -37,7 +37,9 @@ find_package(PkgConfig QUIET)
 # Include directories
 include_directories(${CMAKE_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/ImGui)
-include_directories(${CMAKE_SOURCE_DIR}/Detours/include)
+include_directories(${CMAKE_SOURCE_DIR}/Detours)
+include_directories(${CMAKE_SOURCE_DIR}/RLSDK)
+include_directories(${CMAKE_SOURCE_DIR}/RLSDK/SDK_HEADERS)
 
 # Source files
 set(SOURCES
@@ -61,6 +63,7 @@ set(SOURCES
     Extensions/Extensions/Math.cpp
     Extensions/Extensions/Memory.cpp
     Extensions/Extensions/UnrealMemory.cpp
+    RLSDK/GameDefines.cpp
 )
 
 # Header files

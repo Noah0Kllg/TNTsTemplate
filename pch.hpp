@@ -1,5 +1,4 @@
 #pragma once
-#define WIN32_LEAN_AND_MEAN
 
 #define nullcheck(ptr) if (ptr == NULL || ptr == nullptr || !ptr) {return;}
 
